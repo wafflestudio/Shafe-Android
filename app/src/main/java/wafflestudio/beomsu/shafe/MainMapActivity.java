@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPoint;
@@ -78,7 +79,9 @@ public class MainMapActivity extends AppCompatActivity implements MapView.Curren
     private final View.OnClickListener findOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //TODO : 여기에 find로 가는 인덴트 추가
+
+            Intent intent = new Intent(MainMapActivity.this, SearchMainActivity.class);
+            startActivity(intent);
         }
     };
 

@@ -28,7 +28,8 @@ public class MainListActivity extends AppCompatActivity {
     private final View.OnClickListener findOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            // TODO : find로 가는 인덴트 추가
+            Intent intent = new Intent(MainListActivity.this, SearchMainActivity.class);
+            startActivity(intent);
         }
     };
 
