@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     sothree:umanoPanelHeight="68dp"
-    sothree:umanoShadowHeight="4dp">
+    sothree:umanoShadowHeight="0dp"
+    sothree:umanoOverlay="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,23 +37,95 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint=" 검색할 장소를 입력하세요."
+                android:textColor="#222222"
                 android:textColorHint="#666666"
                 android:layout_weight="1"
-                android:layout_marginRight="45dp"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:cursorVisible="false"
                 android:background="@drawable/rounded_edit_text"
                 android:id="@+id/search_main_ET" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:background="@drawable/top_bar_button"
+                android:includeFontPadding="false"
+                android:text="검색"
+                android:textColor="#222222"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="7dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/search_main_search_button"/>
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/colorchange"
+            android:id="@+id/search_main_my_spot">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/my_spot"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="현재 위치로 찾기"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textColor="#111111"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#D3D3D3">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="최근 검색 기록" 
+                android:textColor="#333333"
+                android:textSize="13sp"
+                android:layout_marginLeft="8dp"
+                android:padding="4dp"/>
+        </LinearLayout>
+        
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_main_recent">
+
+        </ListView>
 
     </LinearLayout>
 
 
      <LinearLayout
+        android:id="@+id/search_main_filter_layout"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:background="#C8E6C9">
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="30dp"
+             android:background="#00000000"
+             android:clickable="false">
+         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -60,9 +133,9 @@
             android:gravity="center|top"
             android:text="필터"
             android:textSize="44sp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:background="#4CAF50"/>
 
     </LinearLayout>
-
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
