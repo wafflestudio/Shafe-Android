@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
 public class SearchMainActivity extends AppCompatActivity {
 
     private EditText searchMainEditText;
@@ -47,6 +49,9 @@ public class SearchMainActivity extends AppCompatActivity {
         searchMainListView.setAdapter(searchMainAdapter);
         initAdapter(searchMainAdapter);
         searchMainListView.setOnItemClickListener(listItemOnClickListener);
+
+        SlidingUpPanelLayout SUPLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        SUPLayout.setDragView(R.id.search_main_up_icon);
 
     }
 
