@@ -2,9 +2,11 @@ package wafflestudio.beomsu.shafe;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,10 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 
 public class SearchMainActivity extends AppCompatActivity {
 
+    private SlidingUpPanelLayout SUPLayout;
     private EditText searchMainEditText;
+    private int currentSelectedFilter;
+    private int[] filterIDList = {R.id.search_main_filter1, R.id.search_main_filter2, R.id.search_main_filter3, R.id.search_main_filter4,
+            R.id.search_main_filter5, R.id.search_main_filter6, R.id.search_main_filter7, R.id.search_main_filter8};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +57,17 @@ public class SearchMainActivity extends AppCompatActivity {
         initAdapter(searchMainAdapter);
         searchMainListView.setOnItemClickListener(listItemOnClickListener);
 
-        SlidingUpPanelLayout SUPLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        SUPLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        SUPLayout.setPanelSlideListener(panelSlideListener);
         SUPLayout.setDragView(R.id.search_main_up_icon);
+
+        ImageView searchMainFilter1 = (ImageView) findViewById(R.id.search_main_filter1);
+        searchMainFilter1.setSelected(true);
+        currentSelectedFilter = 1;
+
+        for(int i=0;i<filterIDList.length;i++) {
+            findViewById(filterIDList[i]).setOnClickListener(filterOnClickListener);
+        }
 
     }
 
@@ -87,11 +103,52 @@ public class SearchMainActivity extends AppCompatActivity {
         }
     };
 
+    private final View.OnClickListener filterOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int nowID = v.getId();
+            for(int i=0;i<filterIDList.length;i++) {
+                findViewById(filterIDList[i]).setSelected(false);
+                if (nowID == filterIDList[i]) currentSelectedFilter = i+1;
+            }
+            v.setSelected(true);
+        }
+    };
+
+    private final PanelSlideListener panelSlideListener = new PanelSlideListener() {
+
+        // TODO : Sliding Panel이 펼쳐져있는 상태일 경우 MainView의 Click이 먹히지 않도록 수정
+        public void onPanelSlide(View panel, float slideOffset) {
+        }
+
+        public void onPanelCollapsed(View panel) {
+        }
+
+        public void onPanelExpanded(View panel) {}
+
+        public void onPanelAnchored(View panel) {
+        }
+
+        public void onPanelHidden(View panel) {
+        }
+
+    };
+
     private void initAdapter(ArrayAdapter<String> adapter) {
         SharedPreferences shPref = getSharedPreferences("spot_recent", MODE_PRIVATE);
         int itemNum = shPref.getInt("num", 0);
         for(int i=itemNum;i>=(itemNum<=10?1:itemNum-9);i--) {
             adapter.add(shPref.getString(i + "_name", " "));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (SUPLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED || SUPLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED ) {
+            SUPLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        }
+        else {
+            super.onBackPressed();
         }
     }
 }

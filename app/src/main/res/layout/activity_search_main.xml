@@ -11,6 +11,7 @@
     sothree:umanoOverlay="true">
 
     <LinearLayout
+        android:id="@+id/search_main_main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -152,9 +153,76 @@
              android:id="@+id/search_main_filter_layout"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
-             android:background="#FFFFFF">
+             android:background="#FFFFFF"
+             android:orientation="vertical"
+             android:layout_gravity="center">
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center">
 
+                <ImageView
+                    android:id="@+id/search_main_filter1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/filter_background"/>
+                <ImageView
+                    android:id="@+id/search_main_filter2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/filter_background"/>
+                <ImageView
+                    android:id="@+id/search_main_filter3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/filter_background"/>
+                <ImageView
+                    android:id="@+id/search_main_filter4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/filter_background"/>
+
+            </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:layout_gravity="center">
+
+                 <ImageView
+                     android:id="@+id/search_main_filter5"
+                     android:layout_width="80dp"
+                     android:layout_height="80dp"
+                     android:layout_margin="5dp"
+                     android:background="@drawable/filter_background"/>
+                 <ImageView
+                     android:id="@+id/search_main_filter6"
+                     android:layout_width="80dp"
+                     android:layout_height="80dp"
+                     android:layout_margin="5dp"
+                     android:background="@drawable/filter_background"/>
+                 <ImageView
+                     android:id="@+id/search_main_filter7"
+                     android:layout_width="80dp"
+                     android:layout_height="80dp"
+                     android:layout_margin="5dp"
+                     android:background="@drawable/filter_background"/>
+                 <ImageView
+                     android:id="@+id/search_main_filter8"
+                     android:layout_width="80dp"
+                     android:layout_height="80dp"
+                     android:layout_margin="5dp"
+                     android:background="@drawable/filter_background"/>
+
+             </LinearLayout>
 
          </LinearLayout>
 
