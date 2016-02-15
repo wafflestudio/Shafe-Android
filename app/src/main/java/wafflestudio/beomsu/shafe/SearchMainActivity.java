@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -48,6 +49,14 @@ public class SearchMainActivity extends AppCompatActivity {
         });
 
         searchMainEditText = (EditText) findViewById(R.id.search_main_ET);
+        searchMainEditText.setInputType(0);
+        searchMainEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText et = (EditText) v;
+                et.setInputType(1);
+            }
+        });
         Button searchMainSearchButton = (Button) findViewById(R.id.search_main_search_button);
         searchMainSearchButton.setOnClickListener(mainSearchButtonOnClickListener);
 
@@ -74,6 +83,9 @@ public class SearchMainActivity extends AppCompatActivity {
     private final View.OnClickListener mainSearchButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Log.e("hihi", v.isEnabled()+"");
+            if (!v.isEnabled()) return;
             String query = searchMainEditText.getText().toString();
             // TODO : query로 검색
 
@@ -99,6 +111,7 @@ public class SearchMainActivity extends AppCompatActivity {
     private final AdapterView.OnItemClickListener listItemOnClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapter, View v, int arg2, long arg3) {
+            if (!v.isEnabled()) return;
             // TODO : recent 기록 잡아서 검색결과로 날아감
         }
     };
@@ -117,22 +130,52 @@ public class SearchMainActivity extends AppCompatActivity {
 
     private final PanelSlideListener panelSlideListener = new PanelSlideListener() {
 
-        // TODO : Sliding Panel이 펼쳐져있는 상태일 경우 MainView의 Click이 먹히지 않도록 수정
         public void onPanelSlide(View panel, float slideOffset) {
         }
 
         public void onPanelCollapsed(View panel) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.search_main_main_view);
+            recursiveClickManager(ll, true);
         }
 
-        public void onPanelExpanded(View panel) {}
+        public void onPanelExpanded(View panel) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.search_main_main_view);
+            recursiveClickManager(ll, false);
+        }
 
         public void onPanelAnchored(View panel) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.search_main_main_view);
+            recursiveClickManager(ll, false);
         }
 
         public void onPanelHidden(View panel) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.search_main_main_view);
+            recursiveClickManager(ll, true);
         }
 
     };
+
+    private void recursiveClickManager(ViewGroup v, boolean choice) {
+        int num = v.getChildCount();
+        v.setClickable(choice);
+        v.setEnabled(choice);
+        for(int i=0;i<num;i++) {
+            View view = v.getChildAt(i);
+            view.setClickable(choice);
+            view.setEnabled(choice);
+            if (view instanceof ViewGroup) {
+                recursiveClickManager((ViewGroup) view, choice);
+            }
+            else if (view instanceof ListView) {
+                ListView lv = (ListView) view;
+                int listChildCount = lv.getChildCount();
+                for(int j=0;j<listChildCount;j++) {
+                    lv.getChildAt(j).setClickable(choice);
+                    lv.getChildAt(j).setEnabled(choice);
+                }
+            }
+        }
+    }
 
     private void initAdapter(ArrayAdapter<String> adapter) {
         SharedPreferences shPref = getSharedPreferences("spot_recent", MODE_PRIVATE);

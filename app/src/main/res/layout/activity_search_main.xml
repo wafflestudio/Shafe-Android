@@ -224,6 +224,52 @@
 
              </LinearLayout>
 
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="6dp"
+                 android:orientation="horizontal">
+                 
+                 <CheckBox
+                     android:id="@+id/search_main_wifi_check"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="Wi-fi 필수"
+                     android:textColor="#222222"/>
+
+                 <CheckBox
+                     android:id="@+id/search_main_concent_check"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="콘센트 필수"
+                     android:textColor="#222222"/>
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="3dp"
+                 android:orientation="horizontal">
+
+                 <CheckBox
+                     android:id="@+id/search_main_sit_check"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="좌식 자리 여부"
+                     android:textColor="#222222"/>
+
+                 <CheckBox
+                     android:id="@+id/search_main_smoking_check"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="흡연실 여부"
+                     android:textColor="#222222"/>
+             </LinearLayout>
+
          </LinearLayout>
 
      </LinearLayout>
